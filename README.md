@@ -1,61 +1,51 @@
 # Multi-Sensor Reliability Analysis for 2-out-of-3 Systems
 
-A comprehensive reliability analysis of LiDAR, Camera, and Radar sensors using Weibull, Exponential, and Normal lifetime models, including system-level 2-out-of-3 redundancy modeling, Bayesian detection analysis, and sensitivity evaluation of hardware upgrades. 
+A summarized explanation of how each part of the analysis was performed, the formulas used (only referenced by name), and the results obtained.
 
----
+## Component Reliability Analysis
+**How it was done:**  
+- LiDAR reliability was computed using the *Weibull reliability function*.  
+- Camera reliability was computed using the *Exponential reliability function*.  
+- Radar reliability was computed using the *Normal distribution survival function*.  
+- Reliability at 5,000 hours was calculated by plugging time into each model.
 
-## 📌 Overview
+**Result:**  
+LiDAR remained the most reliable at long durations, Camera showed moderate reliability, and Radar declined the fastest.
 
-This project models and compares the reliability of three autonomous-vehicle sensor types:
+## Mean Time to Failure (MTTF)
+**How it was done:**  
+- LiDAR MTTF was calculated using the *Weibull mean lifetime formula*.  
+- Camera MTTF was computed using the *Exponential mean lifetime expression*.  
+- Radar MTTF was estimated using the *Normal distribution expectation*.
 
-- **LiDAR** – modeled with a **Weibull** lifetime distribution  
-- **Camera** – modeled with an **Exponential** lifetime distribution  
-- **Radar** – modeled with a **Normal** lifetime distribution  
+**Result:**  
+LiDAR had the highest MTTF, Camera was moderate, and Radar had the lowest due to larger spread in lifetimes.
 
-It then evaluates **system reliability** for different 2-out-of-3 (2oo3) architectures and studies how **hardware upgrades** affect overall system performance.
+## Bayesian Detection Analysis
+**How it was done:**  
+- The *Law of Total Probability* was used to find the overall chance of correct detection by combining detection probabilities under all conditions.  
+- *Bayes’ Theorem* was then used to find the probability of severe conditions given a correct detection.
 
----
+**Result:**  
+Correct detections were highly likely overall, but the likelihood that a correct detection was caused by severe conditions was relatively low.
 
-## 🎯 Key Objectives
+## 2-out-of-3 System Reliability
+**How it was done:**  
+- For identical sensors, the *standard 2-out-of-3 system reliability formula* was applied to each sensor type.  
+- For mixed sensors, system reliability was computed by evaluating all combinations where at least two sensors survive, using the *joint survival probability method*.
 
-- Compute **component reliability** at 5,000 hours and **Mean Time to Failure (MTTF)** for each sensor.
-- Use **Bayes’ Theorem** to estimate the probability of severe conditions given a correct detection.
-- Derive and apply the **2-out-of-3 system reliability formula**:
-  \[
-  R_\text{sys} = 3R^2 - 2R^3
-  \]
-- Evaluate different configurations:
-  - Three LiDAR
-  - Three Camera
-  - Three Radar
-  - Mixed (LiDAR + Camera + Radar)
-- Perform **sensitivity analysis** on hardware upgrades (e.g., increased LiDAR lifetime, reduced Camera failure rate, reduced Radar variance).
+**Result:**  
+A three-LiDAR system had the highest reliability, followed by mixed systems, then Camera-only, and Radar-only was the least reliable.
 
----
+## Sensitivity Analysis
+**How it was done:**  
+- LiDAR improvement was modeled by adjusting its parameters in the *Weibull model*.  
+- Camera improvement was simulated by lowering its rate parameter in the *Exponential model*.  
+- Radar improvement was tested by reducing its spread in the *Normal distribution model*.  
+- All upgrades were re-evaluated through the same component calculations and system-level 2-out-of-3 method.
 
-## 🧮 Methods & Models
+**Result:**  
+LiDAR upgrades produced the biggest improvement, Camera upgrades gave moderate enhancement, and Radar upgrades had smaller but noticeable benefits.
 
-**Distributions**
-
-- **LiDAR**: Weibull \( R_L(t) = e^{-(t / \eta)^\beta} \)
-- **Camera**: Exponential \( R_C(t) = e^{-\lambda t} \)
-- **Radar**: Normal \( R_R(t) = 1 - \Phi\left(\frac{t - \mu}{\sigma}\right) \)
-
-**Bayesian Analysis**
-
-- Uses **Law of Total Probability** and **Bayes’ Theorem** to compute:
-  - \( P(\text{Correct Detection}) \)
-  - \( P(\text{Severe} \mid \text{Correct Detection}) \)
-
-**System-Level Modeling**
-
-- 2-out-of-3 rule: system succeeds if at least two sensors are operational.
-- Handles both **identical** and **mixed-type** sensor configurations.
-
-**Sensitivity Analysis**
-
-- LiDAR: +20% increase in characteristic life \( \eta \)
-- Camera: −15% decrease in failure rate \( \lambda \)
-- Radar: −25% reduction in variance \( \sigma^2 \)
-
-
+## Final Conclusion
+LiDAR consistently outperforms the other two sensors in reliability, lifetime, and system-level performance. A 2-out-of-3 LiDAR setup is the optimal configuration, while mixed systems offer a balanced alternative. Hardware upgrades—especially for LiDAR—can significantly boost reliability.
