@@ -58,25 +58,4 @@ It then evaluates **system reliability** for different 2-out-of-3 (2oo3) archite
 - Camera: −15% decrease in failure rate \( \lambda \)
 - Radar: −25% reduction in variance \( \sigma^2 \)
 
----
-
-## 📁 Repository Structure
-
-Suggested structure (adapt as needed):
-
-```text
-.
-├── data/
-│   └── raw/                 # Any input data files (if used)
-├── notebooks/
-│   └── 01_reliability_analysis.ipynb  # Sensor reliability & MTTF calculations
-│   └── 02_system_reliability.ipynb    # 2oo3 system modeling & Venn logic
-│   └── 03_sensitivity_analysis.ipynb  # Upgrade impact analysis & plots
-├── src/
-│   ├── reliability_models.py          # Distribution functions & MTTF helpers
-│   ├── system_reliability.py          # 2oo3 and mixed-system reliability code
-│   └── bayes_analysis.py              # Bayes’ theorem utilities
-├── report/
-│   └── Assessment1_Report.pdf         # Full written report
-└── README.md
 
